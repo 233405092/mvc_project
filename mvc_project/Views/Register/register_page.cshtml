@@ -1,0 +1,171 @@
+﻿@{
+	Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kayıt Ol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #5d56f9;
+            --secondary-color: #6a63f8;
+            --background-light: #f4f7f6;
+            --background-dark: #e8eaf6;
+            --text-color: #333;
+            --card-bg: #fff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--background-light), var(--background-dark));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+
+        .register-container {
+            background-color: var(--card-bg);
+            padding: 40px;
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px var(--shadow-color);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @@keyframes fadeIn {
+            from
+
+        {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        p {
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+            .input-group label {
+                display: block;
+                margin-bottom: 8px;
+                font-weight: 400;
+                color: #555;
+                font-size: 0.9rem;
+            }
+
+            .input-group input {
+                width: 100%;
+                padding: 12px 15px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                font-size: 1rem;
+                transition: border-color 0.3s, box-shadow 0.3s;
+            }
+
+                .input-group input:focus {
+                    outline: none;
+                    border-color: var(--primary-color);
+                    box-shadow: 0 0 0 3px rgba(93, 86, 249, 0.2);
+                }
+
+        .register-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+            .register-btn:hover {
+                background: var(--secondary-color);
+                transform: translateY(-2px);
+            }
+
+            .register-btn:active {
+                transform: translateY(0);
+            }
+
+        .login-link {
+            display: block;
+            margin-top: 25px;
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+            .login-link a {
+                color: var(--primary-color);
+                text-decoration: none;
+                font-weight: 600;
+                transition: color 0.3s;
+            }
+
+                .login-link a:hover {
+                    color: var(--secondary-color);
+                }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Kayıt Ol</h2>
+        <p>Yeni bir hesap oluştur</p>
+        <form asp-controller="Register" asp-action="Add_user" method="post">
+            <div class="input-group">
+                <label for="name">Ad Soyad</label>
+                <input type="text" name="Name_surname" placeholder="Adınız Soyadınız" required>
+            </div>
+            <div class="input-group">
+                <label for="email">E-posta</label>
+                <input type="email" name="Email" placeholder="ornek@email.com" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Şifre</label>
+                <input type="password" name="Password" placeholder="Şifreniz" required>
+            </div>
+            <button type="submit" class="register-btn">Hesap Oluştur</button>
+        </form>
+        <div class="login-link">
+            Zaten bir hesabın var mı? <a href="/Login/login_page">Giriş Yap</a>
+        </div>
+    </div>
+</body>
+</html>

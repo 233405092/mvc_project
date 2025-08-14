@@ -1,0 +1,380 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hesap Özeti - Kullanıcı Paneli</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #5d56f9;
+            --secondary-color: #6a63f8;
+            --background-light: #f4f7f6;
+            --background-dark: #e8eaf6;
+            --text-color: #333;
+            --card-bg: #fff;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-dark);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px var(--shadow-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo a {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+            .user-info .user-name {
+                font-weight: 600;
+                color: #555;
+            }
+
+            .user-info .logout-btn {
+                background-color: transparent;
+                color: var(--primary-color);
+                border: 1px solid var(--primary-color);
+                padding: 0.5rem 1rem;
+                border-radius: 5px;
+                font-weight: 600;
+                text-decoration: none;
+                transition: all 0.3s ease;
+            }
+
+                .user-info .logout-btn:hover {
+                    background-color: var(--primary-color);
+                    color: white;
+                }
+
+        /* Main Content */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 5%;
+            flex: 1;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+            align-items: start;
+        }
+
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .balance-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 3rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px var(--shadow-color);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+            .balance-card::before {
+                content: '';
+                position: absolute;
+                top: -50px;
+                right: -50px;
+                width: 150px;
+                height: 150px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+            }
+
+            .balance-card h2 {
+                font-size: 1.5rem;
+                font-weight: 300;
+            }
+
+            .balance-card .account-balance {
+                font-size: 3rem;
+                font-weight: 700;
+                margin: 10px 0 20px 0;
+                display: block;
+            }
+
+        .account-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            font-weight: 400;
+        }
+
+            .account-details span {
+                display: block;
+                margin-top: 5px;
+            }
+
+        .transactions-section {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px var(--shadow-color);
+        }
+
+            .transactions-section h3 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+                color: var(--primary-color);
+            }
+
+        .transaction-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+            .transaction-item:last-child {
+                border-bottom: none;
+            }
+
+        .transaction-info h4 {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .transaction-info p {
+            font-size: 0.85rem;
+            color: #777;
+        }
+
+        .transaction-amount {
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+            .transaction-amount.positive {
+                color: #28a745;
+            }
+
+            .transaction-amount.negative {
+                color: #dc3545;
+            }
+
+        /* Right Sidebar - Hızlı İşlemler */
+        .sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .quick-actions-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: 0 5px 20px var(--shadow-color);
+        }
+
+            .quick-actions-card h3 {
+                font-size: 1.5rem;
+                margin-bottom: 1.5rem;
+                color: var(--primary-color);
+                text-align: center;
+            }
+
+        .action-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .action-item {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            border-radius: var(--border-radius);
+            transition: background-color 0.3s, transform 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+            .action-item:hover {
+                background-color: var(--background-dark);
+                transform: translateY(-5px);
+            }
+
+            .action-item .icon {
+                font-size: 2rem;
+                color: var(--primary-color);
+                margin-bottom: 0.5rem;
+            }
+
+            .action-item span {
+                font-size: 0.85rem;
+                font-weight: 600;
+                display: block;
+            }
+
+
+        /* Footer */
+        footer {
+            background-color: var(--text-color);
+            color: white;
+            padding: 1.5rem 5%;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        @@media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="#">Banka Adı</a>
+            </div>
+            <div class="user-info">
+                <span class="user-name">Merhaba, Cem Yılmaz</span>
+                <a href="login.html" class="logout-btn">Çıkış Yap</a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="dashboard-grid">
+            <div class="main-content">
+                <div class="balance-card">
+                    <h2>Hesap Özeti</h2>
+                    <span class="account-balance">15.420,50 TL</span>
+                    <div class="account-details">
+                        <div>
+                            <span>Hesap No: **1234 5678**</span>
+                        </div>
+                        <div>
+                            <span>Şube: **İstanbul Şube**</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="transactions-section">
+                    <h3>Son İşlemler</h3>
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <h4>Fatura Ödemesi - Elektrik</h4>
+                            <p>13 Ağustos 2025</p>
+                        </div>
+                        <span class="transaction-amount negative">-250,00 TL</span>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <h4>Maaş Ödemesi</h4>
+                            <p>10 Ağustos 2025</p>
+                        </div>
+                        <span class="transaction-amount positive">+10.000,00 TL</span>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <h4>Para Transferi - Ahmet Yılmaz</h4>
+                            <p>09 Ağustos 2025</p>
+                        </div>
+                        <span class="transaction-amount negative">-1.500,00 TL</span>
+                    </div>
+                    <div class="transaction-item">
+                        <div class="transaction-info">
+                            <h4>Market Alışverişi</h4>
+                            <p>08 Ağustos 2025</p>
+                        </div>
+                        <span class="transaction-amount negative">-350,25 TL</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="quick-actions-card">
+                    <h3>Hızlı İşlemler</h3>
+                    <div class="action-grid">
+                        <a href="#" class="action-item">
+                            <div class="icon"><i class="fas fa-money-check-alt"></i></div>
+                            <span>Fatura Öde</span>
+                        </a>
+                        <a href="#" class="action-item">
+                            <div class="icon"><i class="fas fa-exchange-alt"></i></div>
+                            <span>EFT/FAST</span>
+                        </a>
+                        <a href="#" class="action-item">
+                            <div class="icon"><i class="fas fa-credit-card"></i></div>
+                            <span>Kartlarım</span>
+                        </a>
+                        <a href="#" class="action-item">
+                            <div class="icon"><i class="fas fa-chart-line"></i></div>
+                            <span>Yatırımlar</span>
+                        </a>
+                        <a href="#" class="action-item">
+                            <div class="icon"><i class="fas fa-hand-holding-usd"></i></div>
+                            <span>Kredi Başvurusu</span>
+                        </a>
+                        <a href="#" class="action-item">
+                            <div class="icon"><i class="fas fa-piggy-bank"></i></div>
+                            <span>Birikim</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Banka Adı. Tüm Hakları Saklıdır.</p>
+    </footer>
+</body>
+</html>
