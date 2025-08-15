@@ -24,4 +24,12 @@ namespace mvc_project.Models
         public BigInteger IBAN { get; set; }
        
     }
+
+    public class SendModel()
+    {
+        public string Sender_Mail { get; set; }
+        public BigInteger IBAN { get; set; }
+        public int Money { get; set; }
+        public string Description { get; set; }
+    }
 }
