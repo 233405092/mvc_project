@@ -1,4 +1,6 @@
-﻿namespace mvc_project.Models
+﻿using System.Numerics;
+
+namespace mvc_project.Models
 {
     public class RegisterViewModel
     {
@@ -11,5 +13,15 @@
     {
         public string Email { get; set; }
         public string Password { get; set; }
+    }
+
+    public class Allinfo_Model
+    {
+        public string Namesurname { get; set; }
+        public string Password { get; set; }
+        public string Email { get; set; }
+        public int Para_miktari { get; set; }
+        public BigInteger IBAN { get; set; }
+       
     }
 }

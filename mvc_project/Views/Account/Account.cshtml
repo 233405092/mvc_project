@@ -2,6 +2,9 @@
     Layout = null;
 }
 
+@model mvc_project.Models.Allinfo_Model;
+
+
 <!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -284,8 +287,8 @@
                 <a href="#">Banka Adı</a>
             </div>
             <div class="user-info">
-                <span class="user-name">Merhaba, Cem Yılmaz</span>
-                <a href="login.html" class="logout-btn">Çıkış Yap</a>
+                <span class="user-name">@Model.Namesurname,</span>
+                <a href="/Login/login_page" class="logout-btn">Çıkış Yap</a>
             </div>
         </nav>
     </header>
@@ -295,13 +298,13 @@
             <div class="main-content">
                 <div class="balance-card">
                     <h2>Hesap Özeti</h2>
-                    <span class="account-balance">15.420,50 TL</span>
+                    <span class="account-balance">@Model.Para_miktari TL</span>
                     <div class="account-details">
                         <div>
-                            <span>Hesap No: **1234 5678**</span>
+                            <span>E-Mail: @Model.Email</span>
                         </div>
                         <div>
-                            <span>Şube: **İstanbul Şube**</span>
+                            <span>IBAN: @Model.IBAN</span>
                         </div>
                     </div>
                 </div>
@@ -372,6 +375,7 @@
             </div>
         </div>
     </main>
+
 
     <footer>
         <p>&copy; 2025 Banka Adı. Tüm Hakları Saklıdır.</p>
